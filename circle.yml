@@ -43,7 +43,7 @@ test:
       - sleep 30
       - adb shell input keyevent 82
       # run tests against the emulator.
-      - ./gradlew /com/mytaxi/android_demo/Login -PdisablePreDex
+      - ./gradlew Login
       # Copying the test reports
       - mkdir -p $CIRCLE_TEST_REPORTS/reports/functional-tests
       - cp -avr app/build/reports/androidTests/connected/flavors/MOCK/ $CIRCLE_TEST_REPORTS/reports/functional-tests
