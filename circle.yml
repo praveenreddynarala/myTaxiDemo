@@ -22,7 +22,8 @@ test:
   override:
 
       # perform unit tests
-      - ./gradlew Login
+      #- ./gradlew com.mytaxi.android_demo.Login
+      - Login
       # Save test reports
       - mkdir -p $CIRCLE_TEST_REPORTS/reports/unit-tests
       - cp -avr app/build/reports/tests/mockDebug/ $CIRCLE_TEST_REPORTS/reports/unit-tests
