@@ -4,22 +4,25 @@
 
 general:
     artifacts:
-        - /home/ubuntu/PopularMovies/app/build/outputs/apk/
+        - /home/ubuntu/myTaxiDemo/app/build/outputs/apk/
 
 machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
 
 dependencies:
+    pre:
+        - wget "https://services.gradle.org/distributions/gradle-2.13-bin.zip"; unzip gradle-2.13-bin.zip
+        - source environmentSetup.sh && copyEnvVarsToGradleProperties
     override:
-        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-23,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services,extra-android-support
-        - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
+        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-23.0.3,android-23,extra-google-m2repository,extra-google-google_play_services,extra-android-m2repository
+        - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
 test:
   override:
 
       # perform unit tests
-      - ./gradlew tesMockDebugUnitTest
+      - ./gradlew Login
       # Save test reports
       - mkdir -p $CIRCLE_TEST_REPORTS/reports/unit-tests
       - cp -avr app/build/reports/tests/mockDebug/ $CIRCLE_TEST_REPORTS/reports/unit-tests
